@@ -533,8 +533,13 @@
     }
   </style>
   <script>
-  function checkPassword() {
-    const password = document.getElementById("password").value;
+  function checkPassword(event) {
+
+    // id is used to check which button is targeted
+    let id = event.target.id;
+    const password = document.getElementById(`password${id}`).value;
+    let response = document.getElementById(`response${id}`);
+
     
     // Construct the URL with the password as a query parameter
     const url = `https://us-central1-dagmarverse-ea57b.cloudfunctions.net/verifyAccess?token=${password}`;
@@ -555,11 +560,18 @@
         //data.qrcode & data.link
 
         // manipulate the dom elements as neccessary here !
+        response.innerHTML = `
+        ${data.qrcode}
+        <a class="data-link" href="https://${data.link}" target="_blank">
+          Registrier dich jetzt 
+          <svg xmlns="http://www.w3.org/2000/svg" height="0.8em" viewBox="0 0 512 512"><style>svg{fill:#ffffff}</style><path d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6V32c0-17.7-14.3-32-32-32H352zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z"/></svg>
+        </a>
+         `;
       })
       .catch(error => {
         // Handle errors that may occur during the request
         console.error('Error:', error);
-
+        response.innerHTML = 'An error occurred, please try again !';
 
       });
   }
@@ -683,11 +695,11 @@
                         <tr>
 
                           <!--LIKE THIS-->
-                          <td>
-                             <label for="email">Passowrd for lookup</label>
-                             <input id="password" name="password" type="text" class="focus-ring-0 focus-ring-transparent" style="margin-top: 8px; border-radius: 6px; border-width: 1px; border-color: #d1d5db; background-color: #fff; padding: 8px; color: #000;">
-                            <button onclick="checkPassword()">Test button for password cloud function (CORS configured)</button>
-                            <p>This line will show the response </p>
+                          <td class="password-container">
+                             <label class="password-label" for="email">Passowrd for lookup</label>
+                             <input id="password1" class="password-input" name="password" type="text" class="focus-ring-0 focus-ring-transparent" style="margin-top: 8px; border-radius: 6px; border-width: 1px; border-color: #d1d5db; background-color: #fff; padding: 8px; color: #000;">
+                            <button id="1" class="password-btn" onclick="checkPassword(event)">Test button</button>
+                            <div id="response1" class="password-response"></div>
                           </td>
 
                           
@@ -847,9 +859,30 @@
                   </td>
                 </tr>
               </table>
+              <table class="lg-flex lg-flex-row" style="margin-top: 40px; margin-bottom: 40px; width: 100%; justify-content: center; padding-left: 12px; padding-right: 12px" cellpadding="0" cellspacing="0" role="none">
+                <tr>
+                  <td class="hover-animate-pulse" style="margin-top: 40px; cursor: pointer; border-radius: 12px; background-color: #C9195D; padding: 16px 56px">
+                    <table class="md-text-18px lg-text-18px xl-text-18px" style="display: inline-flex; width: 100%; align-items: center; justify-content: center; border-radius: 6px; background-color: #C9195D; font-size: 18px; color: #fff" cellpadding="0" cellspacing="0" role="none">
+                      <tr>
+
+                        <!--LIKE THIS-->
+                        <td class="password-container">
+                           <label class="password-label" for="email">Passowrd for lookup</label>
+                           <input id="password2" class="password-input" name="password" type="text" class="focus-ring-0 focus-ring-transparent" style="margin-top: 8px; border-radius: 6px; border-width: 1px; border-color: #d1d5db; background-color: #fff; padding: 8px; color: #000;">
+                          <button id="2" class="password-btn" onclick="checkPassword(event)">Test button</button>
+                          <div id="response2" class="password-response"></div>
+                        </td>
+
+                        
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
         </table>
+        
       </td>
     </tr>
     <tr>
@@ -963,6 +996,26 @@
                       <td>
                         <a href="/business" style="color: #fff; text-decoration-line: none;">Kostenlos anmelden</a>
                       </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <table class="lg-flex lg-flex-row" style="margin-top: 40px; margin-bottom: 40px; width: 100%; justify-content: center; padding-left: 12px; padding-right: 12px" cellpadding="0" cellspacing="0" role="none">
+              <tr>
+                <td class="hover-animate-pulse" style="margin-top: 40px; cursor: pointer; border-radius: 12px; background-color: #C9195D; padding: 16px 56px">
+                  <table class="md-text-18px lg-text-18px xl-text-18px" style="display: inline-flex; width: 100%; align-items: center; justify-content: center; border-radius: 6px; background-color: #C9195D; font-size: 18px; color: #fff" cellpadding="0" cellspacing="0" role="none">
+                    <tr>
+
+                      <!--LIKE THIS-->
+                      <td class="password-container">
+                         <label for="email" class="password-label">Passowrd for lookup</label>
+                         <input id="password3" class="password-input" name="password" type="text" class="focus-ring-0 focus-ring-transparent" style="margin-top: 8px; border-radius: 6px; border-width: 1px; border-color: #d1d5db; background-color: #fff; padding: 8px; color: #000;">
+                        <button id="3" class="password-btn" onclick="checkPassword(event)">Test button</button>
+                        <div id="response3" class="password-response"></div>
+                      </td>
+
+                      
                     </tr>
                   </table>
                 </td>
@@ -1297,5 +1350,42 @@
     50% {
       opacity: .8;
     }
+  }
+
+  .password-container {
+    text-align: left;
+  }
+  .password-btn {
+    background-color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-weight: bold;
+    color:#C9195D;
+    border: 2px solid white;
+    margin: 20px auto;
+    display: block;
+  }
+
+  .password-label {
+    margin-right: 10px;
+    
+  }
+
+  .password-input {
+    width: 100%;
+  }
+
+  .password-response {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .data-link {
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
   }
 </style>
