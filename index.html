@@ -532,6 +532,38 @@
       }
     }
   </style>
+  <script>
+  function checkPassword() {
+    const password = document.getElementById("password").value;
+    
+    // Construct the URL with the password as a query parameter
+    const url = `https://us-central1-dagmarverse-ea57b.cloudfunctions.net/verifyAccess?token=${password}`;
+    
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        // Parse the JSON response body
+        return response.json();
+      })
+      .then(data => {
+        // Handle the JSON response data
+        console.log('Response data:', data);
+        // You can use 'data' as needed
+
+        //data.qrcode & data.link
+
+        // manipulate the dom elements as neccessary here !
+      })
+      .catch(error => {
+        // Handle errors that may occur during the request
+        console.error('Error:', error);
+
+
+      });
+  }
+  </script>
 </head>
 <body style="margin: 0; width: 100%; background-color: #fff; padding: 0; -webkit-font-smoothing: antialiased; word-break: break-word">
   <div style="overflow-x: hidden; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif">
@@ -639,6 +671,26 @@
                           <td>
                             <a href="/business" style="color: #fff; text-decoration-line: none">Kostenlos anmelden</a>
                           </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <table class="lg-flex lg-flex-row" style="margin-top: 40px; margin-bottom: 40px; width: 100%; justify-content: center" cellpadding="0" cellspacing="0" role="none">
+                  <tr>
+                    <td class="hover-animate-pulse" style="margin-top: 40px; cursor: pointer; border-radius: 12px; background-color: #C9195D; padding: 16px 56px">
+                      <table class="md-text-18px lg-text-18px xl-text-18px" style="display: inline-flex; width: 100%; align-items: center; justify-content: center; border-radius: 6px; background-color: #C9195D; font-size: 18px; color: #fff" cellpadding="0" cellspacing="0" role="none">
+                        <tr>
+
+                          <!--LIKE THIS-->
+                          <td>
+                             <label for="email">Passowrd for lookup</label>
+                             <input id="password" name="password" type="text" class="focus-ring-0 focus-ring-transparent" style="margin-top: 8px; border-radius: 6px; border-width: 1px; border-color: #d1d5db; background-color: #fff; padding: 8px; color: #000;">
+                            <button onclick="checkPassword()">Test button for password cloud function (CORS configured)</button>
+                            <p>This line will show the response </p>
+                          </td>
+
+                          
                         </tr>
                       </table>
                     </td>
